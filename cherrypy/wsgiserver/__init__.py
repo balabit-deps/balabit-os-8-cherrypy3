@@ -87,6 +87,7 @@ except ImportError:
     from urlparse import urlparse
 import errno
 import logging
+import struct
 
 import six
 from six.moves import filter
@@ -2464,6 +2465,7 @@ class WSGIGateway_10(WSGIGateway):
             # AF_UNIX. This isn't really allowed by WSGI, which doesn't
             # address unix domain sockets. But it's better than nothing.
             env['SERVER_PORT'] = ''
+            env['X_REMOTE_UID'] = self._get_peer_uid()
         else:
             env['SERVER_PORT'] = str(req.server.bind_addr[1])
 
@@ -2485,6 +2487,13 @@ class WSGIGateway_10(WSGIGateway):
             env.update(req.conn.ssl_env)
 
         return env
+
+    def _get_peer_uid(self):
+        creds = self.req.conn.socket.getsockopt(
+            socket.SOL_SOCKET, socket.SO_PEERCRED, struct.calcsize('3i')
+        )
+        pid, uid, gid = struct.unpack('3i', creds)
+        return uid
 
 
 class WSGIGateway_u0(WSGIGateway_10):
