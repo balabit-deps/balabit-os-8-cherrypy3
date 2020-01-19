@@ -1,0 +1,7 @@
+*.egg-info/*
+debian/cherryd.1
+debian/cherryd3.1
+.cache/
+cherrypy/test/**/*.log
+cherrypy/test/test.conf
+cherrypy/test/static/has*.html

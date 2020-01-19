@@ -1,0 +1,45 @@
+From aa456012b683c2e735a106f9c4301e4fc54bf8e4 Mon Sep 17 00:00:00 2001
+From: Carl Suster <carl@contraflo.ws>
+Date: Fri, 6 Jan 2017 20:21:51 +1100
+Subject: unrepr also from __builtin__
+
+The Python2 tests are failing because __import__ is not found either as
+a module or inside the module "builtins". According to the docs at
+https://docs.python.org/2/library/functions.html#__import__ this
+function is instead inside the module "__builtin__".
+
+This patch makes unrepr also look for the name inside __builtin__ so
+that it can find __import__. It is not clear why this works upstream but
+not in Debian.
+---
+ cherrypy/lib/reprconf.py | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/cherrypy/lib/reprconf.py b/cherrypy/lib/reprconf.py
+index 2553292..0e380b5 100644
+--- a/cherrypy/lib/reprconf.py
++++ b/cherrypy/lib/reprconf.py
+@@ -321,6 +321,11 @@ class _Builder2:
+             return getattr(builtins, name)
+         except AttributeError:
+             pass
++        try:
++            import __builtin__
++            return getattr(__builtin__, name)
++        except AttributeError:
++            pass
+ 
+         raise TypeError('unrepr could not resolve the name %s' % repr(name))
+ 
+@@ -465,6 +470,11 @@ class _Builder3:
+             return getattr(builtins, name)
+         except AttributeError:
+             pass
++        try:
++            import __builtin__
++            return getattr(__builtin__, name)
++        except AttributeError:
++            pass
+ 
+         raise TypeError('unrepr could not resolve the name %s' % repr(name))
+ 

@@ -1,0 +1,57 @@
+Source: cherrypy3
+Section: python
+Priority: optional
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Uploaders: Stephan Sürken <absurd@debian.org>
+Build-Depends:
+ debhelper-compat (= 10),
+ dh-python,
+ python3-sphinx,
+ python3-all,
+ python3-coverage,
+ python3-mock,
+ python3-nose,
+ python3-pytest,
+ python3-setuptools,
+ python3-setuptools-scm,
+Standards-Version: 4.4.1
+Homepage: http://www.cherrypy.org/
+Vcs-Git: https://salsa.debian.org/python-team/modules/cherrypy3.git
+Vcs-Browser: https://salsa.debian.org/python-team/modules/cherrypy3
+
+Package: python3-cherrypy3
+Architecture: all
+Depends:
+ ${misc:Depends},
+ ${python3:Depends},
+Recommends:
+ python3-openssl,
+ python3-routes,
+ python3-simplejson,
+Description: Python web development framework - Python 3 module
+ CherryPy is a pythonic, object-oriented web development framework. It
+ provides the foundation over which complex web-based applications can
+ be written, with little or no knowledge of the underlying
+ protocols. CherryPy allows developers to build web applications in
+ much the same way they would build any other object-oriented Python
+ program. This usually results in smaller source code developed in
+ less time.
+ .
+ CherryPy is up-to-date with the latest developments on using Python
+ for web development: it features a bundled WSGI server, and is able
+ to integrate with other dispatching mechanisms, such as
+ Routes. CherryPy can be run as a standalone application, since it
+ provides its own HTTP server; setting it up behind another HTTP
+ server, such as Apache, or even with mod_python are also options.
+ .
+ This package contains the Python 3 module cherrypy.
+
+Package: python-cherrypy3-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}, ${sphinxdoc:Depends}
+Recommends: python3-cherrypy3
+Description: Documentation for CherryPy web framework
+ CherryPy is a pythonic, object-oriented web development framework.
+ .
+ This package contains the documentation for CherryPy.

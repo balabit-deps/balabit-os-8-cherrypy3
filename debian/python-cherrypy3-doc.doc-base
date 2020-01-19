@@ -1,0 +1,12 @@
+Document: cherrypy3
+Title: CherryPy version 3 Documentation
+Author: Remi Delon, Robert Brewer and others
+Abstract: This document describes CherryPy - Python web framework
+Section: Programming/Python
+
+Format: text
+Files: /usr/share/doc/python-cherrypy3-doc/rst/*.txt
+
+Format: HTML
+Index: /usr/share/doc/python-cherrypy3-doc/html/index.html
+Files: /usr/share/doc/python-cherrypy3-doc/html/*.html

@@ -1,0 +1,1 @@
+extend-diff-ignore="^[^/]+\.egg-info/|cherrypy/test/.+\.log|cherrypy/test/static/has space.html"

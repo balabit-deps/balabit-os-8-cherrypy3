@@ -1,0 +1,2 @@
+Tests: python3-cherrypy3
+Depends: @, python3-all, python3-nose

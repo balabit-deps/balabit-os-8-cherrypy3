@@ -1,0 +1,31 @@
+From 4ab07243a663ed76a046daea5f16f2dd6fc25a62 Mon Sep 17 00:00:00 2001
+From: Carl Suster <carl@contraflo.ws>
+Date: Fri, 6 Jan 2017 19:44:00 +1100
+Subject: disable test_antistampede
+
+This test spawns many threads that all make a request to an endpoint in
+the web server which does nothing but sleep and return a string. The
+idea is that if caching works this is very fast, so the test assertion
+is that the test was completed quickly.
+
+If the test fails it could run for quite a while, and there is a known
+problem upstream which makes this test unreliable which is why it is
+marked as allowed to fail for pytest. To speed things up, we disable it
+completely until it works more reliably.
+---
+ cherrypy/test/test_caching.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cherrypy/test/test_caching.py b/cherrypy/test/test_caching.py
+index fa2b8cb..1e95341 100644
+--- a/cherrypy/test/test_caching.py
++++ b/cherrypy/test/test_caching.py
+@@ -292,7 +292,7 @@ class CacheTest(helper.CPWebCase):
+             self.assertHeader('Age')
+ 
+     @pytest.mark.xfail(reason='#1536')
+-    def test_antistampede(self):
++    def disabled_test_antistampede(self):
+         SECONDS = 4
+         slow_url = '/long_process?seconds={SECONDS}'.format(**locals())
+         # We MUST make an initial synchronous request in order to create the

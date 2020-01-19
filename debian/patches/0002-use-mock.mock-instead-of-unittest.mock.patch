@@ -1,0 +1,51 @@
+From 34c265bb00428be25e6db302843cb4246a07751d Mon Sep 17 00:00:00 2001
+From: Carl Suster <carl@contraflo.ws>
+Date: Wed, 4 Jan 2017 17:33:16 +1100
+Subject: use mock.mock instead of unittest.mock
+
+Upstream uses backports.unittest_mock. Instead, we use python*-mock
+which is available in Debian and does the same job of backporting Python
+3's unittest mock other than calling it mock.mock instead. This patch
+just switches to this import statement in the test suite.
+---
+ cherrypy/test/test_encoding.py         | 2 +-
+ cherrypy/test/test_http.py             | 2 +-
+ cherrypy/wsgiserver/test_wsgiserver.py | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/cherrypy/test/test_encoding.py b/cherrypy/test/test_encoding.py
+index 93778da..197c224 100644
+--- a/cherrypy/test/test_encoding.py
++++ b/cherrypy/test/test_encoding.py
+@@ -2,7 +2,7 @@
+ 
+ import gzip
+ import io
+-from unittest import mock
++from mock import mock
+ 
+ import six
+ 
+diff --git a/cherrypy/test/test_http.py b/cherrypy/test/test_http.py
+index 8cba5a1..a8bd0a3 100644
+--- a/cherrypy/test/test_http.py
++++ b/cherrypy/test/test_http.py
+@@ -4,7 +4,7 @@ import errno
+ import mimetypes
+ import socket
+ import sys
+-from unittest import mock
++from mock import mock
+ 
+ import six
+ 
+diff --git a/cherrypy/wsgiserver/test_wsgiserver.py b/cherrypy/wsgiserver/test_wsgiserver.py
+index b1b6741..3fe2b1f 100644
+--- a/cherrypy/wsgiserver/test_wsgiserver.py
++++ b/cherrypy/wsgiserver/test_wsgiserver.py
+@@ -1,4 +1,4 @@
+-from unittest import mock
++from mock import mock
+ 
+ import six
+ 

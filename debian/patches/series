@@ -1,0 +1,4 @@
+0001-disable-sphinx-rst.linker-extension.patch
+0002-use-mock.mock-instead-of-unittest.mock.patch
+0003-disable-test_antistampede.patch
+0004-unrepr-also-from-__builtin__.patch

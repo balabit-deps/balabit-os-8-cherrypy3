@@ -1,0 +1,32 @@
+upstream
+========
+
+It seems that version 8.9.1 is the last upstream that can be packaged
+in the current manner. On how to support upstream >= 9, some more
+brainstorming needs to be done:
+
+- Since v9, the httpd/wsgiserver part has gone to a separate upstream 'cheroot' [1].
+- Later versions also require python packages not in Debian yet [2].
+- While 8.9.1 seems to be API-compatible with 3.5 to the best of my knowledge, 9.x
+	versions at least lack the wsgiserver part, and needs to be checked for other
+	possible API changes (to avoid breaking [3]).
+
+[1] https://pypi.python.org/pypi/Cheroot
+[2] https://pypi.python.org/pypi/jaraco.classes
+[3] calibre mini-buildd mnemosyne plinth python3-ws4py python-cylc python-sponge python-springpython python-ws4py salt-api
+
+test suite
+==========
+
+8.9.1-2: The **testsuite** currently does not work properly. It is
+still called (see rules), but the results are currently ignored.
+
+Fwiw, tests succeeded here when called manually like so::
+
+	$ ( cd .pybuild/pythonX.Y_2.7/build; python2.7 -m pytest cherrypy/test cherrypy/wsgiserver -l )
+	$ ( cd .pybuild/pythonX.Y_3.6/build; python3.6 -m pytest cherrypy/test cherrypy/wsgiserver -l )
+
+However, on package building (and even more on buildds), things go
+awry for some reason.
+
+ -- Stephan Sürken <absurd@debian.org>, Tue, 23 Jan 2018 16:20:50 +0100
