@@ -1,3 +1,9 @@
+cherrypy3 (8.9.1-6bb1) bionic; urgency=medium
+
+  * wsgiserver: add X_REMOTE_UID to contain the UNIX uid of the peer
+
+ -- Balabit Platform Team <devnull@dev.null>  Wed, 11 Nov 2020 17:44:30 +0100
+
 cherrypy3 (8.9.1-6) unstable; urgency=medium
 
   [ Ondřej Nový ]
